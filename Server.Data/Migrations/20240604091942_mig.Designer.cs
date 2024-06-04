@@ -12,8 +12,8 @@ using Server.Data;
 namespace Server.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240326192938_sixth")]
-    partial class sixth
+    [Migration("20240604091942_mig")]
+    partial class mig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,25 +34,22 @@ namespace Server.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateOnly>("BirthDate")
-                        .HasColumnType("DateOnly2");
+                        .HasColumnType("date");
 
                     b.Property<string>("EmployeeIdentification")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateOnly>("StartDate")
-                        .HasColumnType("DateOnly2");
+                        .HasColumnType("date");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
@@ -71,7 +68,7 @@ namespace Server.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateOnly>("StartDate")
-                        .HasColumnType("DateOnly2");
+                        .HasColumnType("date");
 
                     b.HasKey("RoleId", "EmployeeId");
 
@@ -92,12 +89,30 @@ namespace Server.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("Server.Core.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Server.Core.Entities.EmployeeRole", b =>

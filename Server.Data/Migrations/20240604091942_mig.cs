@@ -5,7 +5,7 @@
 namespace Server.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class sixth : Migration
+    public partial class mig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
